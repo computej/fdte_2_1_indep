@@ -6,3 +6,15 @@ Expected Output:
   toppings: ["pepperoni", "mushrooms"],
   size: "medium",
 }
+
+Describe Pizza.getPrice();
+
+Test: "Each size has it's own price: small should be 3.99"
+Code: let myPizza = new Pizza(undefined, "small");
+Console.log(myPizza.getPrice());
+Expected Output: 3.99
+
+Test: "The 'default' price of toppings is 0.99."
+Code: let myPizza = new Pizza(["asdf"], "small");
+Console.log(myPizza.getPrice());
+Expected Output: 4.98
