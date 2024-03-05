@@ -1,0 +1,8 @@
+Describe Pizza.constructor();
+Test "It should create an object with an array for toppings, and a property for size."
+Code: let myPizza = new Pizza(["pepperoni", "mushrooms"], "medium");
+Expected Output:
+{
+  toppings: ["pepperoni", "mushrooms"],
+  size: "medium",
+}
