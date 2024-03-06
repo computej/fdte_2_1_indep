@@ -10,7 +10,7 @@ class Pizza {
     //make sure it's an array
     if(toppingsPrice.forEach) {
       toppingsPrice.forEach(function(value, index, array) {
-        toppingsPrice += 0.99;
+        toppingsPrice += toppingPriceMap.get(element) ?? "0.99";
       });
     } 
     return sizePrice + toppingsPrice;
@@ -21,4 +21,13 @@ const sizePriceMap = new Map([
   ["small",3.99],
   ["medium",4.99],
   ["large",5.99],
+]);
+
+const toppingPriceMap = new Map([
+  ["pepperoni",0.99],
+  ["mushrooms",1.09],
+  ["tomatoes",0.99],
+  ["red peppers",1.09],
+  ["asiago",1.09],
+  ["ground beef",1.19],
 ]);
