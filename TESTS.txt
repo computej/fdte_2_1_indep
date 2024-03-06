@@ -19,3 +19,12 @@ Code: let myPizza = new Pizza(["asdf"], "small");
 Console.log(myPizza.getPrice());
 Expected Output: 4.98
 
+Test: "Like the sizes, each topping should have it own price."
+Code: let myPizza("ground beef" ,"small");
+Console.log(myPizza.getPrice());
+Expected Output: 5.18
+
+Test: "The output should be the sum of the toppings and the size."
+Code: let myPizza = new Pizza(["pepperoni", "tomatoes"], "medium");
+pizzaPrice = myPizza.getPrice();
+Expected output: 6.97
