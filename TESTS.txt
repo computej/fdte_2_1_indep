@@ -18,3 +18,4 @@ Test: "The 'default' price of toppings is 0.99."
 Code: let myPizza = new Pizza(["asdf"], "small");
 Console.log(myPizza.getPrice());
 Expected Output: 4.98
+
