@@ -17,6 +17,8 @@ class Pizza {
   }
 }
 
+let toppingList = new Array(1);
+
 const sizePriceMap = new Map([
   ["small",3.99],
   ["medium",4.99],
@@ -32,7 +34,7 @@ const toppingPriceMap = new Map([
   ["ground beef",1.19],
 ]);
 
-function updateToppingList() {
+function getNewToppingList() {
   let p = document.createElement("p");
   p.innerText = "No additional toppings";
   return p;

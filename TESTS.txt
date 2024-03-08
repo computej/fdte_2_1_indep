@@ -29,8 +29,8 @@ Code: let myPizza = new Pizza(["pepperoni", "tomatoes"], "medium");
 pizzaPrice = myPizza.getPrice();
 Expected output: 6.97
 
-Describe updateToppingList();
+Describe getNewToppingList();
 
 Test: "On activation, it should return an new HTMLElement with 'No additional toppings' as its text."
-Code: updateToppingList();
+Code: getNewToppingList();
 Expected output: A HTMLElement with the InnerText "No additional toppings".
