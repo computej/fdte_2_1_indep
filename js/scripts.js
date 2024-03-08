@@ -8,9 +8,9 @@ class Pizza {
     let toppingsPrice = 0;
     debugger;
     //make sure it's an array
-    if(toppingsPrice.forEach) {
-      toppingsPrice.forEach(function(value, index, array) {
-        toppingsPrice += toppingPriceMap.get(element) ?? "0.99";
+    if(this.toppings.forEach) {
+      this.toppings.forEach(function(value, index, array) {
+        toppingsPrice += toppingPriceMap.get(value) ?? "0.99";
       });
     } 
     return sizePrice + toppingsPrice;
