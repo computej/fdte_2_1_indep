@@ -31,3 +31,9 @@ const toppingPriceMap = new Map([
   ["asiago",1.09],
   ["ground beef",1.19],
 ]);
+
+function updateToppingList() {
+  let p = document.createElement("p");
+  p.innerText = "No additional toppings";
+  return p;
+}
