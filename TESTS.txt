@@ -34,3 +34,8 @@ Describe getNewToppingList();
 Test: "On activation, it should return an new HTMLElement with 'No additional toppings' as its text."
 Code: getNewToppingList();
 Expected output: A HTMLElement with the InnerText "No additional toppings".
+
+Test: "if toppingList has items, it should create a ordered list"
+Code: toppingList.push("asdf");
+getNewToppingList();
+Expected output: A HTMLElement who's tagName is "ol";

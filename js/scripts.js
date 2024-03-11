@@ -17,7 +17,7 @@ class Pizza {
   }
 }
 
-let toppingList = new Array(1);
+let toppingList = new Array(0);
 
 const sizePriceMap = new Map([
   ["small",3.99],
