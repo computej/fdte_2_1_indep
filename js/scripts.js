@@ -35,7 +35,13 @@ const toppingPriceMap = new Map([
 ]);
 
 function getNewToppingList() {
-  let p = document.createElement("p");
-  p.innerText = "No additional toppings";
-  return p;
+  let outElement;
+  if(toppingList && toppingList.length > 0) {
+    outElement = document.createElement("ol");
+  }
+  else {
+    outElement = document.createElement("p");
+    outElement.innerText = "No additional toppings";
+  }
+  return outElement;
 }
