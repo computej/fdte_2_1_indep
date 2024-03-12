@@ -38,6 +38,11 @@ function getNewToppingList() {
   let outElement;
   if(toppingList && toppingList.length > 0) {
     outElement = document.createElement("ol");
+    toppingList.forEach(function(value, index, array) {
+      let li = document.createElement("li");
+      li.innerText = value;
+      outElement.append(li);
+    });
   }
   else {
     outElement = document.createElement("p");
