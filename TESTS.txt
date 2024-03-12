@@ -35,7 +35,12 @@ Test: "On activation, it should return an new HTMLElement with 'No additional to
 Code: getNewToppingList();
 Expected output: A HTMLElement with the InnerText "No additional toppings".
 
-Test: "if toppingList has items, it should create a ordered list"
+Test: "If toppingList has items, it should create a ordered list"
 Code: toppingList.push("asdf");
       getNewToppingList();
 Expected output: A HTMLElement who's tagName is "ol";
+
+Test: "For each item in toppingList, append each entry to toppingList as a list item";
+Code: toppingList.push("asdf", "jkl;", "wasd", "esdf");
+      getNewToppingList();
+Expected Output: An Ordered List with the the above strings, in order, as List Items.
