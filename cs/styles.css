@@ -1,0 +1,13 @@
+.pizza-flex-stuff {
+  box-shadow: -5px 5px 0px 1px black;
+  background-color: goldenrod;
+  color: black;
+}
+
+.card, .btn {
+  border-radius: 0px;
+}
+
+.topping-add-button {
+  
+}

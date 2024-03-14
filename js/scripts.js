@@ -1,3 +1,5 @@
+//Business
+
 class Pizza {
   constructor(toppings, size) {
     this.toppings = toppings;
@@ -50,3 +52,40 @@ function getNewToppingList() {
   }
   return outElement;
 }
+
+//UI
+
+function updateToppingList() {
+  const toppingElement = getNewToppingList();
+  let toppingListID = document.getElementById("topping-list");
+  toppingListID.innerHTML = "";
+  toppingListID.append(toppingElement);
+}
+
+//TODO: add the button functionality
+function toppingButtonPressed(event) {
+  const selectedTopping = event.target.getAttribute("data-topping");
+  if(toppingList.length < 3) {
+    toppingList.push(selectedTopping);
+  }
+  console.log(toppingList);
+  updateToppingList();
+}
+
+function toppingRemoveButtonPressed(event) {
+  if (toppingList.length > 0) {
+    toppingList.pop();
+  }
+  console.log(toppingList);
+  updateToppingList();
+}
+
+window.addEventListener("load",function() {
+  let toppingAddButtons = document.querySelectorAll(".topping-add-button");
+  toppingAddButtons.forEach(function(element, index, array){
+    console.log(element);
+    element.addEventListener("click", toppingButtonPressed);
+  });
+  let toppingRemoveButton = document.querySelector(".topping-remove-button");
+  toppingRemoveButton.addEventListener("click", toppingRemoveButtonPressed);
+});
