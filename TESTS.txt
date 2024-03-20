@@ -29,18 +29,18 @@ Code: let myPizza = new Pizza(["pepperoni", "tomatoes"], "medium");
 pizzaPrice = myPizza.getPrice();
 Expected output: 6.97
 
-Describe getNewToppingList();
+Describe getNewToppingElement();
 
 Test: "On activation, it should return an new HTMLElement with 'No additional toppings' as its text."
-Code: getNewToppingList();
+Code: getNewToppingElement();
 Expected output: A HTMLElement with the InnerText "No additional toppings".
 
 Test: "If toppingList has items, it should create a ordered list"
 Code: toppingList.push("asdf");
-      getNewToppingList();
+      getNewToppingElement();
 Expected output: A HTMLElement who's tagName is "ol";
 
 Test: "For each item in toppingList, append each entry to toppingList as a list item";
 Code: toppingList.push("asdf", "jkl;", "wasd", "esdf");
-      getNewToppingList();
+      getNewToppingElement();
 Expected Output: An Ordered List with the the above strings, in order, as List Items.

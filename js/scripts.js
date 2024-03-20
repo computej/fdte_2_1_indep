@@ -38,7 +38,7 @@ const toppingPriceMap = new Map([
   ["ground beef",1.19],
 ]);
 
-function getNewToppingList() {
+function getNewToppingElement() {
   let outElement;
   if(toppingList && toppingList.length > 0) {
     outElement = document.createElement("ol");
@@ -69,7 +69,7 @@ function orderSubmitAction(whatToShow) {
 //TODO: For each pizza, display its toppings
 
 function updateToppingList() {
-  const toppingElement = getNewToppingList();
+  const toppingElement = getNewToppingElement();
   let toppingListID = document.getElementById("topping-list");
   toppingListID.innerHTML = "";
   toppingListID.append(toppingElement);
