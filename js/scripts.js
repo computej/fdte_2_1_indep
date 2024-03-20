@@ -20,6 +20,8 @@ class Pizza {
 }
 
 let toppingList = new Array(0);
+let pizzaSize = "small";
+let pizzaList = new Array(0);
 
 const sizePriceMap = new Map([
   ["small",3.99],
@@ -55,6 +57,17 @@ function getNewToppingList() {
 
 //UI
 
+function orderSubmitAction(whatToShow) {
+  //just pretend
+  let orderInfoDiv = document.querySelector("#order-info");
+  let orderSubmittedDiv = document.querySelector("#order-submited");
+  orderInfoDiv.style.display = whatToShow ? "none" : "flex";
+  //must preserve properties of BS's .row
+  orderSubmittedDiv.style.display = whatToShow ? "flex": "none";
+}
+
+//TODO: For each pizza, display its toppings
+
 function updateToppingList() {
   const toppingElement = getNewToppingList();
   let toppingListID = document.getElementById("topping-list");
@@ -84,4 +97,14 @@ window.addEventListener("load",function() {
   });
   let toppingRemoveButton = document.querySelector(".topping-remove-button");
   toppingRemoveButton.addEventListener("click", toppingRemoveButtonPressed);
+
+  let placeOrderButton = this.document.getElementById("place-order-button")
+  placeOrderButton.addEventListener("click", function(event) {
+    orderSubmitAction(true);
+  });
+  
+  let closSubmittedButton = this.document.getElementById("close-submitted-button")
+  closSubmittedButton.addEventListener("click", function(event) {
+    orderSubmitAction(false);
+  });
 });

@@ -8,6 +8,16 @@
   border-radius: 0px;
 }
 
-.topping-add-button {
-  
+.card {
+  background-color: darkgoldenrod;
+}
+
+.btn {
+  box-shadow: -5px 5px 0px 0px black;
+  background-color: darkgoldenrod;
+  border-width: 2px;
+}
+
+#order-submited {
+  display: none;
 }

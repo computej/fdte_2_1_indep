@@ -13,12 +13,14 @@
     <h1>Pizza Parlor</h1>
     <br>
     <div>whatever</div>
-    <div class="row">
+    <div class="row" id="order-info">
       <div class="col-6">
         <div class="pizza-flex-stuff">
           <h3 class="mx-1">Order Info</h3>
-          <div id="topping-list">
-            <p>No additional toppings</p>
+          <!-- TODO: Move topping list to toppings menu. -->
+          <!-- TODO: Show pizzas that are on order.  -->
+          <div id="pizza-list">
+            <p>Nothing to order</p>
           </div>
           <div id="order-placer">
             <button type="button" id="place-order-button" class="btn btn-primary">
@@ -58,13 +60,35 @@
                     <button type="button" class="my-1 btn btn-danger topping-remove-button">
                       Remove Topping
                     </button>
+                    <button type="button" class="my-1 btn btn-success pizza-add-button">
+                      Add Pizza to Order
+                    </button>
                   </form>
+                  <hr>
+                  <div id="topping-list">
+                    <p>No additional toppings</p>
+                  </div>
                 </div>
               </div>
               <hr>
             </div>
           </div>
         </div>
+    </div>
+  </div>
+  <div class="row" id="order-submited">
+    <div class="col-2 invisible">
+        <p>WHY IS MY VISIBILITY NOT SET TO HIDDEN</p>
+    </div>
+    <div class="col-8">
+      <div class="pizza-flex-stuff">
+        <p>THERE IS NOTHING HERE YET STAY TUNED</p>
+        <div>asdf</div>
+        <button id="close-submitted-button" class="btn btn-primary">Continue</button>
+      </div>
+    </div>
+    <div class="col-2 invisible">
+        <p>WHY IS MY VISIBILITY NOT SET TO HIDDEN</p>
     </div>
   </div>
 </body>
