@@ -44,3 +44,9 @@ Test: "For each item in toppingList, append each entry to toppingList as a list 
 Code: toppingList.push("asdf", "jkl;", "wasd", "esdf");
       getNewToppingElement();
 Expected Output: An Ordered List with the the above strings, in order, as List Items.
+
+Describe getNewPizzasElement();
+
+Test: "On activation, it should return an new HTMLElement with 'Nothing to order' as its text."
+Code: getNewPizzasElement();
+Expected output: A HTMLElement with the InnerText "Nothing to order".
