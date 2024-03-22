@@ -8,7 +8,6 @@ class Pizza {
   getPrice() {
     const sizePrice = sizePriceMap.get(this.size);
     let toppingsPrice = 0;
-    debugger;
     //make sure it's an array
     if(this.toppings.forEach) {
       this.toppings.forEach(function(value, index, array) {
@@ -19,9 +18,8 @@ class Pizza {
   }
 }
 
-let toppingList = new Array(0);
-let pizzaSize = "small";
-let pizzaList = new Array(0);
+//TODO: No Global Vars, move into GlobalThis.onload
+//let toppingList = new Array(0);
 
 const sizePriceMap = new Map([
   ["small",3.99],
@@ -38,11 +36,11 @@ const toppingPriceMap = new Map([
   ["ground beef",1.19],
 ]);
 
-function getNewToppingElement() {
+function getNewToppingElement(asdf) {
   let outElement;
-  if(toppingList && toppingList.length > 0) {
+  if(asdf && asdf.length > 0) {
     outElement = document.createElement("ol");
-    toppingList.forEach(function(value) {
+    asdf.forEach(function(value) {
       let li = document.createElement("li");
       li.innerText = value;
       outElement.append(li);
@@ -68,35 +66,44 @@ function orderSubmitAction(whatToShow) {
 
 //TODO: For each pizza, display its toppings
 
-function updateToppingList() {
-  const toppingElement = getNewToppingElement();
+function updateToppingList(list) {
+  const toppingElement = getNewToppingElement(list);
   let toppingListID = document.getElementById("topping-list");
   toppingListID.innerHTML = "";
   toppingListID.append(toppingElement);
 }
 
-function toppingButtonPressed(event) {
+function toppingButtonPressed(event, list) {
   const selectedTopping = event.target.getAttribute("data-topping");
-  if(toppingList.length < 3) {
-    toppingList.push(selectedTopping);
+  if(list.length < 3) {
+    list.push(selectedTopping);
   }
-  updateToppingList();
+  updateToppingList(list);
 }
 
-function toppingRemoveButtonPressed(event) {
-  if (toppingList.length > 0) {
-    toppingList.pop();
+function toppingRemoveButtonPressed(event, list) {
+  if (list.length > 0) {
+    list.pop();
   }
-  updateToppingList();
+  updateToppingList(list);
 }
 
 window.addEventListener("load",function() {
+  let toppingList = new Array(0);
+  let pizzaSize = "small";
+  let pizzaList = new Array(0);
+  //Crap. I'll need to rewrite a few things
+  //to insure everything is in the correct scope
   let toppingAddButtons = document.querySelectorAll(".topping-add-button");
   toppingAddButtons.forEach(function(element, index, array){
-    element.addEventListener("click", toppingButtonPressed);
+    element.addEventListener("click", function(event){
+      toppingButtonPressed(event, toppingList);
+    });
   });
   let toppingRemoveButton = document.querySelector(".topping-remove-button");
-  toppingRemoveButton.addEventListener("click", toppingRemoveButtonPressed);
+  toppingRemoveButton.addEventListener("click", function(event){
+    toppingRemoveButtonPressed(event, toppingList);
+  });
 
   let placeOrderButton = this.document.getElementById("place-order-button")
   placeOrderButton.addEventListener("click", function(event) {
