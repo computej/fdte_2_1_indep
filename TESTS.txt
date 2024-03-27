@@ -35,7 +35,7 @@ Test: "On activation, it should return an new HTMLElement with 'No additional to
 Code: getNewToppingElement();
 Expected output: A HTMLElement with the InnerText "No additional toppings".
 
-Test: "If toppingList has items, it should create a ordered list"
+Test: "If toppingList has items, it should create an ordered list"
 Code: toppingList.push("asdf");
       getNewToppingElement();
 Expected output: A HTMLElement who's tagName is "ol";
@@ -50,3 +50,11 @@ Describe getNewPizzasElement();
 Test: "On activation, it should return an new HTMLElement with 'Nothing to order' as its text."
 Code: getNewPizzasElement();
 Expected output: A HTMLElement with the InnerText "Nothing to order".
+
+Test: "If pizzaList has items, the output should be an ordered list"
+Code:
+let list = new Array(0);
+list.push("69105");
+getNewPizzasElement(list);
+
+Expected output: "A HTMLElement ordered list."
