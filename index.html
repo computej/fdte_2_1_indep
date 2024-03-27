@@ -60,6 +60,16 @@
                     <button type="button" class="my-1 btn btn-danger topping-remove-button">
                       Remove Topping
                     </button>
+                    <hr>
+                    <div class="form-floating">
+                      <select class="form-select" name="pizza-size-selector" id="pizza-size-selector">
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                      </select>
+                      <!-- pos is important, this label must be after select for correct rendering -->
+                      <label for="pizza-size-selector">Select a size:</label>
+                    </div>
                     <button type="button" class="my-1 btn btn-success pizza-add-button">
                       Add Pizza to Order
                     </button>

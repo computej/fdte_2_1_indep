@@ -18,9 +18,6 @@ class Pizza {
   }
 }
 
-//TODO: No Global Vars, move into GlobalThis.onload
-//let toppingList = new Array(0);
-
 const sizePriceMap = new Map([
   ["small",3.99],
   ["medium",4.99],
@@ -53,6 +50,12 @@ function getNewToppingElement(asdf) {
   return outElement;
 }
 
+function getNewPizzasElement(list) {
+  let outElement = document.createElement("p");
+  outElement.innerText = "Nothing to order."
+  return outElement;
+}
+
 //UI
 
 function orderSubmitAction(whatToShow) {
@@ -65,6 +68,19 @@ function orderSubmitAction(whatToShow) {
 }
 
 //TODO: For each pizza, display its toppings
+
+function updatePizzasList(list) {
+  let pizzaListDiv = document.getElementById("pizza-list");
+  pizzaListDiv.innerHTML = "";
+  pizzaListDiv.append(getNewPizzasElement());
+}
+
+function pizzaAddButtonPressed(event, list, toppings, size) {
+  let newPizza = new Pizza(toppings, size);
+  console.log(newPizza);
+  list.push(newPizza);
+  updatePizzasList(list);
+}
 
 function updateToppingList(list) {
   const toppingElement = getNewToppingElement(list);
@@ -90,16 +106,17 @@ function toppingRemoveButtonPressed(event, list) {
 
 window.addEventListener("load",function() {
   let toppingList = new Array(0);
-  let pizzaSize = "small";
+  //TODO: Buttons for changing size, changes an attribute in the add to order button
+  let nextPizzaSize = "small";
   let pizzaList = new Array(0);
-  //Crap. I'll need to rewrite a few things
-  //to insure everything is in the correct scope
+
   let toppingAddButtons = document.querySelectorAll(".topping-add-button");
   toppingAddButtons.forEach(function(element, index, array){
     element.addEventListener("click", function(event){
       toppingButtonPressed(event, toppingList);
     });
   });
+
   let toppingRemoveButton = document.querySelector(".topping-remove-button");
   toppingRemoveButton.addEventListener("click", function(event){
     toppingRemoveButtonPressed(event, toppingList);
@@ -113,5 +130,10 @@ window.addEventListener("load",function() {
   let closSubmittedButton = this.document.getElementById("close-submitted-button")
   closSubmittedButton.addEventListener("click", function(event) {
     orderSubmitAction(false);
+  });
+
+  let pizzaAddButton = document.querySelector(".pizza-add-button");
+  pizzaAddButton.addEventListener("click", function(event) {
+    pizzaAddButtonPressed(event, pizzaList, toppingList, nextPizzaSize);
   });
 });
