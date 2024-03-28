@@ -52,7 +52,12 @@ function getNewToppingElement(asdf) {
 
 function getNewPizzasElement(list) {
   let outElement = document.createElement("p");
-  outElement.innerText = "Nothing to order."
+  if (list && list.forEach) {
+    outElement = document.createElement("ol");
+  }
+  else {
+    outElement.innerText = "Nothing to order."
+  }
   return outElement;
 }
 
