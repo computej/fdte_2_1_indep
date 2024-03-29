@@ -58,3 +58,14 @@ list.push("69105");
 getNewPizzasElement(list);
 
 Expected output: "A HTMLElement ordered list."
+
+Test: "For each instance of Pizza in the list, insert list items into the ol, each with the price of that"
+Code:
+let myPizza = new Pizza("[ground beef]" ,"small");
+let mySecondPizza = new Pizza("[pepperoni]","small")
+let pizzaList = new Array(0);
+pizzaList.push(myPizza);
+pizzaList.push(mySecondPizza);
+getNewPizzasElement(pizzaList)
+
+Expected output: "A HTMLElement ordered list, with list items that describe the array elements"
