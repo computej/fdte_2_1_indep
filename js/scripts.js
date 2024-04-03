@@ -51,9 +51,37 @@ function getNewToppingElement(asdf) {
 }
 
 function getNewPizzasElement(list) {
+  console.table(list);
   let outElement = document.createElement("p");
   if (list && list.forEach) {
+    //TODO: Correct capitalization
+    //
+    // <size> Pizza ($n.nn)
+    // Ͱ N toppings: A, B
+
     outElement = document.createElement("ol");
+    list.forEach(function(value, index, array) {
+      let ul = document.createElement("ul");
+      let outText = (value.size).toString().concat(" Pizza ($",value.getPrice(),")"); 
+      let ul_li = document.createElement("li");
+      ul_li.innerText = outText;
+      ul.append(ul_li);
+      ul_li = document.createElement("li");
+      // let toppingText = "No toppings";
+      // debugger;
+      // if(value.toppings.length > 0) {
+      //   toppingText = (value.toppings.length).toString().concat(" toppings: ");
+      //   value.toppings.forEach(function(value, index, array) {
+      //     toppingText = toppingText.concat(value, ", ");
+      //   });
+      //   ul_li.innerText = toppingText;
+      //   ul.append(ul_li);
+      // }
+      let ol_li = document.createElement("li");
+      ol_li.append(ul);
+      outElement.append(ol_li);
+
+    });
   }
   else {
     outElement.innerText = "Nothing to order."
@@ -77,12 +105,11 @@ function orderSubmitAction(whatToShow) {
 function updatePizzasList(list) {
   let pizzaListDiv = document.getElementById("pizza-list");
   pizzaListDiv.innerHTML = "";
-  pizzaListDiv.append(getNewPizzasElement());
+  pizzaListDiv.append(getNewPizzasElement(list));
 }
 
 function pizzaAddButtonPressed(event, list, toppings, size) {
   let newPizza = new Pizza(toppings, size);
-  console.log(newPizza);
   list.push(newPizza);
   updatePizzasList(list);
 }
@@ -102,6 +129,14 @@ function toppingButtonPressed(event, list) {
   updateToppingList(list);
 }
 
+//TODO: merge these two, determine what to call via duck-checking
+function removePizzaButtonPressed(event, list) {
+  if (list.length > 0) {
+    list.pop();
+  }
+  updatePizzasList(list);
+}
+
 function toppingRemoveButtonPressed(event, list) {
   if (list.length > 0) {
     list.pop();
@@ -110,20 +145,23 @@ function toppingRemoveButtonPressed(event, list) {
 }
 
 window.addEventListener("load",function() {
+  //TODO: fix serious bug where all pizzas get the exact same toppings
   let toppingList = new Array(0);
-  //TODO: Buttons for changing size, changes an attribute in the add to order button
   let nextPizzaSize = "small";
+  let nextPizzaToppings = [];
   let pizzaList = new Array(0);
 
   let toppingAddButtons = document.querySelectorAll(".topping-add-button");
   toppingAddButtons.forEach(function(element, index, array){
     element.addEventListener("click", function(event){
+      debugger;
       toppingButtonPressed(event, toppingList);
     });
   });
 
   let toppingRemoveButton = document.querySelector(".topping-remove-button");
   toppingRemoveButton.addEventListener("click", function(event){
+    debugger;
     toppingRemoveButtonPressed(event, toppingList);
   });
 
@@ -139,6 +177,8 @@ window.addEventListener("load",function() {
 
   let pizzaAddButton = document.querySelector(".pizza-add-button");
   pizzaAddButton.addEventListener("click", function(event) {
+    debugger;
+    nextPizzaSize = document.getElementById("pizza-size-selector").value;
     pizzaAddButtonPressed(event, pizzaList, toppingList, nextPizzaSize);
   });
 });

@@ -22,11 +22,19 @@
           <div id="pizza-list">
             <p>Nothing to order</p>
           </div>
-          <div id="order-placer">
-            <button type="button" id="place-order-button" class="btn btn-primary">
-              Place Order
-            </button>
+          <div id="order-placer" class="card w-50 ms-1 border">
+            <div class="card-body">
+              <form id="order-placing-form">
+                <button type="button" id="place-order-button" class="my-1 btn btn-primary">
+                  Place Order
+                </button>
+                <button type="button" id="remove-pizza-button" class="my-1 btn btn-danger">
+                  Remove Pizza
+                </button>
+              </form>
+            </div>
           </div>
+          <hr>
         </div>
       </div>
       <div class="col-6">
@@ -67,7 +75,7 @@
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
                       </select>
-                      <!-- pos is important, this label must be after select for correct rendering -->
+                      <!-- this label must be after select for correct rendering -->
                       <label for="pizza-size-selector">Select a size:</label>
                     </div>
                     <button type="button" class="my-1 btn btn-success pizza-add-button">
