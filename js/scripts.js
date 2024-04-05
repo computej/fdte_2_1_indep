@@ -51,7 +51,6 @@ function getNewToppingElement(asdf) {
 }
 
 function getNewPizzasElement(list) {
-  console.table(list);
   let outElement = document.createElement("p");
   if (list && list.forEach) {
     //TODO: Correct capitalization
@@ -67,16 +66,7 @@ function getNewPizzasElement(list) {
       ul_li.innerText = outText;
       ul.append(ul_li);
       ul_li = document.createElement("li");
-      // let toppingText = "No toppings";
-      // debugger;
-      // if(value.toppings.length > 0) {
-      //   toppingText = (value.toppings.length).toString().concat(" toppings: ");
-      //   value.toppings.forEach(function(value, index, array) {
-      //     toppingText = toppingText.concat(value, ", ");
-      //   });
-      //   ul_li.innerText = toppingText;
-      //   ul.append(ul_li);
-      // }
+
       let ol_li = document.createElement("li");
       ol_li.append(ul);
       outElement.append(ol_li);
@@ -108,61 +98,68 @@ function updatePizzasList(list) {
   pizzaListDiv.append(getNewPizzasElement(list));
 }
 
-function pizzaAddButtonPressed(event, list, toppings, size) {
-  let newPizza = new Pizza(toppings, size);
-  list.push(newPizza);
+function pizzaAddButtonPressed(event, pizza, list) {
+  const asdf = new Pizza(pizza.toppings, pizza.size);
+  pizza = null;
+  pizza = new Pizza([],"small");
+  if(!list.keys) {
+    throw new Error("What's an array doing here? This is for maps only!");
+    return;
+  }
+  list.set(list.size,asdf);
   updatePizzasList(list);
 }
 
-function updateToppingList(list) {
-  const toppingElement = getNewToppingElement(list);
+function updateToppingList(pizza) {
+  const toppingElement = getNewToppingElement(pizza);
   let toppingListID = document.getElementById("topping-list");
   toppingListID.innerHTML = "";
   toppingListID.append(toppingElement);
 }
 
-function toppingButtonPressed(event, list) {
+function toppingButtonPressed(event, intoppings) {
+  debugger;
   const selectedTopping = event.target.getAttribute("data-topping");
-  if(list.length < 3) {
-    list.push(selectedTopping);
+  if(intoppings.length < 3) {
+    intoppings.push(selectedTopping);
   }
-  updateToppingList(list);
+  updateToppingList(intoppings);
 }
 
-//TODO: merge these two, determine what to call via duck-checking
-function removePizzaButtonPressed(event, list) {
-  if (list.length > 0) {
-    list.pop();
+function removePizzaButtonPressed(event, listOfPizza) {
+  if (listOfPizza.length > 0) {
+    listOfPizza.pop();
   }
-  updatePizzasList(list);
+  updatePizzasList(listOfPizza);
 }
 
-function toppingRemoveButtonPressed(event, list) {
-  if (list.length > 0) {
-    list.pop();
+function toppingRemoveButtonPressed(event, inpizza) {
+  if (inpizza.toppings.length > 0) {
+    inpizza.toppings.pop();
   }
-  updateToppingList(list);
+  updateToppingList(inpizza);
 }
+
+// Debug
 
 window.addEventListener("load",function() {
   //TODO: fix serious bug where all pizzas get the exact same toppings
-  let toppingList = new Array(0);
-  let nextPizzaSize = "small";
-  let nextPizzaToppings = [];
-  let pizzaList = new Array(0);
+  let nextPizza = new Pizza([], "small");
+  //TODO: fix functions because I changed this to a Map
+  let pizzaList = new Map();
 
   let toppingAddButtons = document.querySelectorAll(".topping-add-button");
   toppingAddButtons.forEach(function(element, index, array){
     element.addEventListener("click", function(event){
-      debugger;
-      toppingButtonPressed(event, toppingList);
+      toppingButtonPressed(event, nextPizza.toppings);
+      console.table(pizzaList)
     });
   });
 
   let toppingRemoveButton = document.querySelector(".topping-remove-button");
   toppingRemoveButton.addEventListener("click", function(event){
-    debugger;
-    toppingRemoveButtonPressed(event, toppingList);
+      toppingRemoveButtonPressed(event, nextPizza);
+      console.table(pizzaList)
   });
 
   let placeOrderButton = this.document.getElementById("place-order-button")
@@ -177,8 +174,12 @@ window.addEventListener("load",function() {
 
   let pizzaAddButton = document.querySelector(".pizza-add-button");
   pizzaAddButton.addEventListener("click", function(event) {
-    debugger;
-    nextPizzaSize = document.getElementById("pizza-size-selector").value;
-    pizzaAddButtonPressed(event, pizzaList, toppingList, nextPizzaSize);
+    nextPizza.size = document.getElementById("pizza-size-selector").value;
+    pizzaAddButtonPressed(event, nextPizza, pizzaList);
+    //destroy any pointers to the original object
+    //to not have stupid behavior
+    delete nextPizza;
+    nextPizza = new Pizza([], "small");
+    console.table(pizzaList);
   });
 });
