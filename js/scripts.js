@@ -118,7 +118,6 @@ function updateToppingList(pizza) {
 }
 
 function toppingButtonPressed(event, intoppings) {
-  debugger;
   const selectedTopping = event.target.getAttribute("data-topping");
   if(intoppings.length < 3) {
     intoppings.push(selectedTopping);
