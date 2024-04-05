@@ -52,7 +52,7 @@ function getNewToppingElement(asdf) {
 
 function getNewPizzasElement(list) {
   let outElement = document.createElement("p");
-  if (list && list.forEach) {
+  if (list && list.keys.length > 0) {
     //TODO: Correct capitalization
     //
     // <size> Pizza ($n.nn)
@@ -93,9 +93,10 @@ function orderSubmitAction(whatToShow) {
 //TODO: For each pizza, display its toppings
 
 function updatePizzasList(list) {
+  const pizzasElement = getNewPizzasElement(list);
   let pizzaListDiv = document.getElementById("pizza-list");
   pizzaListDiv.innerHTML = "";
-  pizzaListDiv.append(getNewPizzasElement(list));
+  pizzaListDiv.append(pizzasElement);
 }
 
 function pizzaAddButtonPressed(event, pizza, list) {
@@ -126,8 +127,9 @@ function toppingButtonPressed(event, intoppings) {
 }
 
 function removePizzaButtonPressed(event, listOfPizza) {
-  if (listOfPizza.length > 0) {
-    listOfPizza.pop();
+  if (listOfPizza.size > 0) {
+    //listOfPizza.pop();
+    listOfPizza.delete(listOfPizza.size - 1);
   }
   updatePizzasList(listOfPizza);
 }
@@ -151,14 +153,14 @@ window.addEventListener("load",function() {
   toppingAddButtons.forEach(function(element, index, array){
     element.addEventListener("click", function(event){
       toppingButtonPressed(event, nextPizza.toppings);
-      console.table(pizzaList)
+      console.table(pizzaList);
     });
   });
 
   let toppingRemoveButton = document.querySelector(".topping-remove-button");
   toppingRemoveButton.addEventListener("click", function(event){
       toppingRemoveButtonPressed(event, nextPizza);
-      console.table(pizzaList)
+      console.table(pizzaList);
   });
 
   let placeOrderButton = this.document.getElementById("place-order-button")
@@ -180,5 +182,9 @@ window.addEventListener("load",function() {
     delete nextPizza;
     nextPizza = new Pizza([], "small");
     console.table(pizzaList);
+  });
+  let pizzaRemoveButton = this.document.getElementById("remove-pizza-button");
+  pizzaRemoveButton.addEventListener("click", function(event) {
+    removePizzaButtonPressed(event, pizzaList);
   });
 });
