@@ -144,7 +144,6 @@ function toppingRemoveButtonPressed(event, inpizza) {
 // Debug
 
 window.addEventListener("load",function() {
-  //TODO: fix serious bug where all pizzas get the exact same toppings
   let nextPizza = new Pizza([], "small");
   //TODO: fix functions because I changed this to a Map
   let pizzaList = new Map();
@@ -153,19 +152,19 @@ window.addEventListener("load",function() {
   toppingAddButtons.forEach(function(element, index, array){
     element.addEventListener("click", function(event){
       toppingButtonPressed(event, nextPizza.toppings);
-      console.table(pizzaList);
     });
   });
 
   let toppingRemoveButton = document.querySelector(".topping-remove-button");
   toppingRemoveButton.addEventListener("click", function(event){
       toppingRemoveButtonPressed(event, nextPizza);
-      console.table(pizzaList);
   });
 
   let placeOrderButton = this.document.getElementById("place-order-button")
   placeOrderButton.addEventListener("click", function(event) {
-    orderSubmitAction(true);
+    if(pizzaList.size > 0) {
+      orderSubmitAction(true);
+    }
   });
   
   let closSubmittedButton = this.document.getElementById("close-submitted-button")
@@ -176,12 +175,11 @@ window.addEventListener("load",function() {
   let pizzaAddButton = document.querySelector(".pizza-add-button");
   pizzaAddButton.addEventListener("click", function(event) {
     nextPizza.size = document.getElementById("pizza-size-selector").value;
-    pizzaAddButtonPressed(event, nextPizza, pizzaList);
-    //destroy any pointers to the original object
-    //to not have stupid behavior
-    delete nextPizza;
-    nextPizza = new Pizza([], "small");
-    console.table(pizzaList);
+      pizzaAddButtonPressed(event, nextPizza, pizzaList);
+      //destroy any pointers to the original object
+      //to not have stupid behavior
+      delete nextPizza;
+      nextPizza = new Pizza([], "small");
   });
   let pizzaRemoveButton = this.document.getElementById("remove-pizza-button");
   pizzaRemoveButton.addEventListener("click", function(event) {
