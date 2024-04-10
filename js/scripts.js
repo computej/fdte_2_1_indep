@@ -54,10 +54,6 @@ function getNewPizzasElement(list) {
   let outElement = document.createElement("p");
   if (list && list.keys.length > 0) {
     //TODO: Correct capitalization
-    //
-    // <size> Pizza ($n.nn)
-    // Ͱ N toppings: A, B
-
     outElement = document.createElement("ol");
     list.forEach(function(value, index, array) {
       let ul = document.createElement("ul");
@@ -89,8 +85,6 @@ function orderSubmitAction(whatToShow) {
   //must preserve properties of BS's .row
   orderSubmittedDiv.style.display = whatToShow ? "flex": "none";
 }
-
-//TODO: For each pizza, display its toppings
 
 function updatePizzasList(list) {
   const pizzasElement = getNewPizzasElement(list);
