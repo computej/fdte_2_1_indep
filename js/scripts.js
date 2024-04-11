@@ -1,7 +1,7 @@
 //Business
 
 class Pizza {
-  constructor(toppings, size) {
+  constructor(toppings, size = "small") {
     this.toppings = toppings;
     this.size = size;
   }
@@ -11,7 +11,7 @@ class Pizza {
     //make sure it's an array
     if(this.toppings.forEach) {
       this.toppings.forEach(function(value, index, array) {
-        toppingsPrice += toppingPriceMap.get(value) ?? "0.99";
+        toppingsPrice += toppingPriceMap.get(value) ?? 0.99;
       });
     } 
     return sizePrice + toppingsPrice;
