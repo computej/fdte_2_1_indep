@@ -53,7 +53,7 @@ function getNewToppingElement(asdf) {
 function getNewPizzasElement(list) {
   let outElement = document.createElement("p");
   if (list && list.size > 0) {
-    //TODO: Correct capitalization
+    //TODO: Correct capitalization?
     outElement = document.createElement("ol");
     list.forEach(function(value, index, array) {
       let ul = document.createElement("ul");
@@ -137,7 +137,6 @@ function toppingRemoveButtonPressed(event, inpizza) {
 
 window.addEventListener("load",function() {
   let nextPizza = new Pizza([], "small");
-  //TODO: fix functions because I changed this to a Map
   let pizzaList = new Map();
 
   let toppingAddButtons = document.querySelectorAll(".topping-add-button");
