@@ -22,4 +22,4 @@ The interface on right-hand side has buttons for adding toppings to a pizza, and
 
 * None at present
 
-Copyright (c) 2023 _Jeffrey Fisher_
+Copyright (c) 2024 _Jeffrey Fisher_
