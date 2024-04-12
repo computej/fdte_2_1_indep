@@ -52,7 +52,7 @@ function getNewToppingElement(asdf) {
 
 function getNewPizzasElement(list) {
   let outElement = document.createElement("p");
-  if (list && list.keys.length > 0) {
+  if (list && list.size > 0) {
     //TODO: Correct capitalization
     outElement = document.createElement("ol");
     list.forEach(function(value, index, array) {
@@ -95,8 +95,6 @@ function updatePizzasList(list) {
 
 function pizzaAddButtonPressed(event, pizza, list) {
   const asdf = new Pizza(pizza.toppings, pizza.size);
-  pizza = null;
-  pizza = new Pizza([],"small");
   if(!list.keys) {
     throw new Error("What's an array doing here? This is for maps only!");
     return;
