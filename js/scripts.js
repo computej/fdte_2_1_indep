@@ -57,7 +57,7 @@ function getNewPizzasElement(list) {
     outElement = document.createElement("ol");
     list.forEach(function(value, index, array) {
       let ul = document.createElement("ul");
-      let outText = (value.size).toString().concat(" Pizza ($",value.getPrice(),")"); 
+      let outText = (value.size).toString().concat(" Pizza ($",value.getPrice().toString().substring(0,4),")"); 
       let ul_li = document.createElement("li");
       ul_li.innerText = outText;
       ul.append(ul_li);
@@ -172,6 +172,7 @@ window.addEventListener("load",function() {
       //to not have stupid behavior
       delete nextPizza;
       nextPizza = new Pizza([], "small");
+      updateToppingList(nextPizza);
   });
   let pizzaRemoveButton = this.document.getElementById("remove-pizza-button");
   pizzaRemoveButton.addEventListener("click", function(event) {
