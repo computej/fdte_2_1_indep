@@ -10,7 +10,7 @@ class Pizza {
     let toppingsPrice = 0;
     //make sure it's an array
     if(this.toppings.forEach) {
-      this.toppings.forEach(function(value, index, array) {
+      this.toppings.forEach(function(value) {
         toppingsPrice += toppingPriceMap.get(value) ?? 0.99;
       });
     } 
@@ -55,7 +55,7 @@ function getNewPizzasElement(list) {
   if (list && list.size > 0) {
     //TODO: Correct capitalization?
     outElement = document.createElement("ol");
-    list.forEach(function(value, index, array) {
+    list.forEach(function(value) {
       let ul = document.createElement("ul");
       let outText = (value.size).toString().concat(" Pizza ($",value.getPrice().toString().substring(0,4),")"); 
       let ul_li = document.createElement("li");
