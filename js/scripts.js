@@ -33,11 +33,11 @@ const toppingPriceMap = new Map([
   ["ground beef",1.19],
 ]);
 
-function getNewToppingElement(asdf) {
+function getNewToppingElement(toppingList) {
   let outElement;
-  if(asdf && asdf.length > 0) {
+  if(toppingList && toppingList.length > 0) {
     outElement = document.createElement("ol");
-    asdf.forEach(function(value) {
+    toppingList.forEach(function(value) {
       let li = document.createElement("li");
       li.innerText = value;
       outElement.append(li);
@@ -53,19 +53,18 @@ function getNewToppingElement(asdf) {
 function getNewPizzasElement(list) {
   let outElement = document.createElement("p");
   if (list && list.size > 0) {
-    //TODO: Correct capitalization?
     outElement = document.createElement("ol");
     list.forEach(function(value) {
       let ul = document.createElement("ul");
       let outText = (value.size).toString().concat(" Pizza ($",value.getPrice().toString().substring(0,4),")"); 
-      let ul_li = document.createElement("li");
-      ul_li.innerText = outText;
-      ul.append(ul_li);
-      ul_li = document.createElement("li");
+      let ulLi = document.createElement("li");
+      ulLi.innerText = outText;
+      ul.append(ulLi);
+      ulLi = document.createElement("li");
 
-      let ol_li = document.createElement("li");
-      ol_li.append(ul);
-      outElement.append(ol_li);
+      let olLi = document.createElement("li");
+      olLi.append(ul);
+      outElement.append(olLi);
 
     });
   }
@@ -78,11 +77,10 @@ function getNewPizzasElement(list) {
 //UI
 
 function orderSubmitAction(whatToShow) {
-  //just pretend
   let orderInfoDiv = document.querySelector("#order-info");
-  let orderSubmittedDiv = document.querySelector("#order-submited");
+  let orderSubmittedDiv = document.querySelector("#order-submitted");
   orderInfoDiv.style.display = whatToShow ? "none" : "flex";
-  //must preserve properties of BS's .row
+  //preserve properties of BS's .row
   orderSubmittedDiv.style.display = whatToShow ? "flex": "none";
 }
 
@@ -93,13 +91,12 @@ function updatePizzasList(list) {
   pizzaListDiv.append(pizzasElement);
 }
 
-function pizzaAddButtonPressed(event, pizza, list) {
-  const asdf = new Pizza(pizza.toppings, pizza.size);
+function pizzaAddButtonPressed(pizza, list) {
+  const newPizza = new Pizza(pizza.toppings, pizza.size);
   if(!list.keys) {
-    throw new Error("What's an array doing here? This is for maps only!");
-    return;
+    throw new Error("pizzaAddButtonPressed: Received an Array instead of expected Map");
   }
-  list.set(list.size,asdf);
+  list.set(list.size,newPizza);
   updatePizzasList(list);
 }
 
@@ -110,27 +107,26 @@ function updateToppingList(pizza) {
   toppingListID.append(toppingElement);
 }
 
-function toppingButtonPressed(event, intoppings) {
+function toppingButtonPressed(event, toppingList) {
   const selectedTopping = event.target.getAttribute("data-topping");
-  if(intoppings.length < 3) {
-    intoppings.push(selectedTopping);
+  if(toppingList.length < 3) {
+    toppingList.push(selectedTopping);
   }
-  updateToppingList(intoppings);
+  updateToppingList(toppingList);
 }
 
-function removePizzaButtonPressed(event, listOfPizza) {
+function removePizzaButtonPressed(listOfPizza) {
   if (listOfPizza.size > 0) {
-    //listOfPizza.pop();
     listOfPizza.delete(listOfPizza.size - 1);
   }
   updatePizzasList(listOfPizza);
 }
 
-function toppingRemoveButtonPressed(event, inpizza) {
-  if (inpizza.toppings.length > 0) {
-    inpizza.toppings.pop();
+function toppingRemoveButtonPressed(targetPizza) {
+  if (targetPizza.toppings.length > 0) {
+    targetPizza.toppings.pop();
   }
-  updateToppingList(inpizza);
+  updateToppingList(targetPizza);
 }
 
 // Debug
@@ -140,41 +136,45 @@ window.addEventListener("load",function() {
   let pizzaList = new Map();
 
   let toppingAddButtons = document.querySelectorAll(".topping-add-button");
-  toppingAddButtons.forEach(function(element, index, array){
+  toppingAddButtons.forEach(function(element){
     element.addEventListener("click", function(event){
       toppingButtonPressed(event, nextPizza.toppings);
     });
   });
 
   let toppingRemoveButton = document.querySelector(".topping-remove-button");
-  toppingRemoveButton.addEventListener("click", function(event){
-      toppingRemoveButtonPressed(event, nextPizza);
+  toppingRemoveButton.addEventListener("click", function(){
+      toppingRemoveButtonPressed(nextPizza);
   });
 
   let placeOrderButton = this.document.getElementById("place-order-button")
-  placeOrderButton.addEventListener("click", function(event) {
+  placeOrderButton.addEventListener("click", function() {
     if(pizzaList.size > 0) {
       orderSubmitAction(true);
     }
   });
   
   let closSubmittedButton = this.document.getElementById("close-submitted-button")
-  closSubmittedButton.addEventListener("click", function(event) {
+  closSubmittedButton.addEventListener("click", function() {
     orderSubmitAction(false);
   });
 
   let pizzaAddButton = document.querySelector(".pizza-add-button");
-  pizzaAddButton.addEventListener("click", function(event) {
+  pizzaAddButton.addEventListener("click", function() {
     nextPizza.size = document.getElementById("pizza-size-selector").value;
-      pizzaAddButtonPressed(event, nextPizza, pizzaList);
-      //destroy any pointers to the original object
-      //to not have stupid behavior
+      pizzaAddButtonPressed(nextPizza, pizzaList);
+      // For some reason, pushing nextPizza seems 
+      // to push a reference to its place in the map.
+      // So when we modify nextPizza, suddenly all entries in 
+      // the map become identical.
+      // Deleting nextPizza fixes that 
+      // without affecting the map's contents.
       delete nextPizza;
       nextPizza = new Pizza([], "small");
       updateToppingList(nextPizza);
   });
   let pizzaRemoveButton = this.document.getElementById("remove-pizza-button");
-  pizzaRemoveButton.addEventListener("click", function(event) {
-    removePizzaButtonPressed(event, pizzaList);
+  pizzaRemoveButton.addEventListener("click", function() {
+    removePizzaButtonPressed(pizzaList);
   });
 });

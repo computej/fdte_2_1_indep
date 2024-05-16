@@ -19,7 +19,7 @@ Code: let myPizza = new Pizza(["asdf"], "small");
 Console.log(myPizza.getPrice());
 Expected Output: 4.98
 
-Test: "Like the sizes, each topping should have it own price."
+Test: "Like the sizes, each topping should have its own price."
 Code: let myPizza("ground beef" ,"small");
 Console.log(myPizza.getPrice());
 Expected Output: 5.18
@@ -69,3 +69,6 @@ pizzaList.push(mySecondPizza);
 getNewPizzasElement(pizzaList)
 
 Expected output: "A HTMLElement ordered list, with list items that describe the array elements"
+
+UI:
+
