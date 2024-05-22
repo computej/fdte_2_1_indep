@@ -50,11 +50,11 @@ function getNewToppingElement(toppingList) {
   return outElement;
 }
 
-function getNewPizzasElement(list) {
+function getNewPizzasElement(listOfPizza) {
   let outElement = document.createElement("p");
-  if (list && list.size > 0) {
+  if (listOfPizza && listOfPizza.size > 0) {
     outElement = document.createElement("ol");
-    list.forEach(function(value) {
+    listOfPizza.forEach(function(value) {
       let ul = document.createElement("ul");
       let outText = (value.size).toString().concat(" Pizza ($",value.getPrice().toString().substring(0,4),")"); 
       let ulLi = document.createElement("li");
@@ -76,12 +76,12 @@ function getNewPizzasElement(list) {
 
 //UI
 
-function orderSubmitAction(whatToShow) {
+function orderSubmitAction(submittedOrInfo) {
   let orderInfoDiv = document.querySelector("#order-info");
   let orderSubmittedDiv = document.querySelector("#order-submitted");
-  orderInfoDiv.style.display = whatToShow ? "none" : "flex";
+  orderInfoDiv.style.display = submittedOrInfo ? "none" : "flex";
   //preserve properties of BS's .row
-  orderSubmittedDiv.style.display = whatToShow ? "flex": "none";
+  orderSubmittedDiv.style.display = submittedOrInfo ? "flex": "none";
 }
 
 function updatePizzasList(list) {
@@ -91,13 +91,13 @@ function updatePizzasList(list) {
   pizzaListDiv.append(pizzasElement);
 }
 
-function pizzaAddButtonPressed(pizza, list) {
+function pizzaAddButtonPressed(pizza, listMap) {
   const newPizza = new Pizza(pizza.toppings, pizza.size);
-  if(!list.keys) {
+  if(!listMap.keys) {
     throw new Error("pizzaAddButtonPressed: Received an Array instead of expected Map");
   }
-  list.set(list.size,newPizza);
-  updatePizzasList(list);
+  listMap.set(listMap.size,newPizza);
+  updatePizzasList(listMap);
 }
 
 function updateToppingList(pizza) {
@@ -128,8 +128,6 @@ function toppingRemoveButtonPressed(targetPizza) {
   }
   updateToppingList(targetPizza);
 }
-
-// Debug
 
 window.addEventListener("load",function() {
   let nextPizza = new Pizza([], "small");
