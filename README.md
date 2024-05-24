@@ -18,7 +18,7 @@ The interface on right-hand side has buttons for adding toppings to a pizza, and
 
 ## Installation:
 
-To run, simply download this repository using the "Clone or Download" menu, extract its contents to a new folder, and open `index.html` in a your browser.
+To run, simply download this repository using the green "Code" menu, extract its contents to a new folder, and open `index.html` in a your browser.
 
 ## Known Issues:
 
