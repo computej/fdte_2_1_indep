@@ -42,8 +42,7 @@ function getNewToppingElement(toppingList) {
       li.innerText = value;
       outElement.append(li);
     });
-  }
-  else {
+  } else {
     outElement = document.createElement("p");
     outElement.innerText = "No additional toppings";
   }
@@ -67,8 +66,7 @@ function getNewPizzasElement(listOfPizza) {
       outElement.append(olLi);
 
     });
-  }
-  else {
+  } else {
     outElement.innerText = "Nothing to order."
   }
   return outElement;
@@ -80,7 +78,6 @@ function orderSubmitAction(submittedOrInfo) {
   let orderInfoDiv = document.querySelector("#order-info");
   let orderSubmittedDiv = document.querySelector("#order-submitted");
   orderInfoDiv.style.display = submittedOrInfo ? "none" : "flex";
-  //preserve properties of BS's .row
   orderSubmittedDiv.style.display = submittedOrInfo ? "flex": "none";
 }
 
@@ -161,12 +158,6 @@ window.addEventListener("load",function() {
   pizzaAddButton.addEventListener("click", function() {
     nextPizza.size = document.getElementById("pizza-size-selector").value;
       pizzaAddButtonPressed(nextPizza, pizzaList);
-      // For some reason, pushing nextPizza seems 
-      // to push a reference to its place in the map.
-      // So when we modify nextPizza, suddenly all entries in 
-      // the map become identical.
-      // Deleting nextPizza fixes that 
-      // without affecting the map's contents.
       delete nextPizza;
       nextPizza = new Pizza([], "small");
       updateToppingList(nextPizza);
