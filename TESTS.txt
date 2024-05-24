@@ -20,11 +20,11 @@ Console.log(myPizza.getPrice());
 Expected Output: 4.98
 
 Test: "Like the sizes, each topping should have its own price."
-Code: let myPizza("ground beef" ,"small");
+Code: let myPizza = new Pizza(["ground beef"] ,"small");
 Console.log(myPizza.getPrice());
 Expected Output: 5.18
 
 Test: "The output should be the sum of the toppings and the size."
 Code: let myPizza = new Pizza(["pepperoni", "tomatoes"], "medium");
-pizzaPrice = myPizza.getPrice();
+Console.log(myPizza.getPrice();)
 Expected output: 6.97
