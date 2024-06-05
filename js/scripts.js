@@ -6,6 +6,20 @@ class Pizza {
     this.size = size;
   }
   getPrice() {
+    const sizePriceMap = new Map([
+      ["small",3.99],
+      ["medium",4.99],
+      ["large",5.99],
+    ]);
+    
+    const toppingPriceMap = new Map([
+      ["pepperoni",0.99],
+      ["mushrooms",1.09],
+      ["tomatoes",0.99],
+      ["red peppers",1.09],
+      ["asiago",1.09],
+      ["ground beef",1.19],
+    ]);
     const sizePrice = sizePriceMap.get(this.size);
     let toppingsPrice = 0;
     //make sure it's an array
@@ -17,21 +31,6 @@ class Pizza {
     return sizePrice + toppingsPrice;
   }
 }
-
-const sizePriceMap = new Map([
-  ["small",3.99],
-  ["medium",4.99],
-  ["large",5.99],
-]);
-
-const toppingPriceMap = new Map([
-  ["pepperoni",0.99],
-  ["mushrooms",1.09],
-  ["tomatoes",0.99],
-  ["red peppers",1.09],
-  ["asiago",1.09],
-  ["ground beef",1.19],
-]);
 
 function getNewToppingElement(toppingList) {
   let outElement;
